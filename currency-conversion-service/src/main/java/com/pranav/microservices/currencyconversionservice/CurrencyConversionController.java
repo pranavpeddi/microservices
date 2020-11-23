@@ -11,9 +11,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @RestController
 public class CurrencyConversionController {
 
+	
+	private Logger log=LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	private CurrencyExchangeServiceProxy ceproxy;
@@ -33,10 +39,11 @@ public class CurrencyConversionController {
 	
 
 	@GetMapping("/currency-converter-feign/from/{from}/to/{to}/quantity/{quantity}")
-	public CurrencyConversionBean emmaya(@PathVariable String from,
-			@PathVariable String to,@PathVariable BigDecimal quantity)
+	public CurrencyConversionBean emmaya(@PathVariable("from") String from,
+			@PathVariable("to") String to,@PathVariable BigDecimal quantity)
 	{
 		CurrencyConversionBean response=ceproxy.converter(from, to);
+		log.info("{}",response);
 		return new CurrencyConversionBean(response.getId(),from,to,response.getConversionMultiple(),quantity,quantity.multiply(response.getConversionMultiple()),response.getPort());
 	}
 	

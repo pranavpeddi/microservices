@@ -7,7 +7,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-
 @EnableFeignClients("com.pranav.microservices.currencyconversionservice")
 @EnableDiscoveryClient
 public class CurrencyConversionServiceApplication {

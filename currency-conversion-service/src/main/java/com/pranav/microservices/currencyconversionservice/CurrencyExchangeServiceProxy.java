@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 //@FeignClient(name ="currency-exchange-service",url="localhost:8000")
 @RibbonClient(name="currency-exchange-service")
 @FeignClient(name="netflix-zuul-api-gateway-server")
-//
+
 public interface CurrencyExchangeServiceProxy {
 	
 	
